@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pulse — Focus sessions that survive your calendar</title>
+<style>
+  :root{
+    --bg:#0F1013; --panel:#17181D; --line:#26272E;
+    --ink:#F4F2EA; --muted:#9BA0A6; --accent:#D9F24F;
+    --radius:14px;
+    --font:"Noto Sans","Helvetica Neue",Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
+  .label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);font-weight:700}
+  .label.mut{color:var(--muted)}
+  header{border-bottom:1px solid var(--line)}
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
+  .wordmark{font-weight:800;font-size:20px;letter-spacing:-.01em}
+  .wordmark span{color:var(--accent)}
+  nav{display:flex;gap:28px;align-items:center}
+  nav a{color:var(--muted);text-decoration:none;font-size:15px;white-space:nowrap}
+  .btn{display:inline-block;background:var(--accent);color:#141503;font-weight:700;
+       padding:12px 22px;border-radius:10px;text-decoration:none;font-size:15px}
+  .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  .hero{display:flex;gap:56px;padding:96px 0 88px;align-items:flex-start}
+  .hero-copy{flex:1.15}
+  h1{font-size:64px;line-height:1.04;font-weight:800;letter-spacing:-.02em;margin:18px 0 20px}
+  h1 em{font-style:normal;color:var(--accent)}
+  .sub{color:var(--muted);font-size:19px;max-width:480px;margin-bottom:32px}
+  .cta-row{display:flex;gap:16px;align-items:center}
+  .cta-note{color:var(--muted);font-size:14px}
+  .hero-visual{flex:1}
+  .mock{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+  .mock-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+  .mock-title{font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .timer{font-size:84px;font-weight:800;letter-spacing:-.02em;line-height:1;text-align:center;margin:10px 0 4px}
+  .timer-sub{text-align:center;color:var(--muted);font-size:14px;margin-bottom:24px}
+  .progress{height:8px;background:#23242B;border-radius:99px;overflow:hidden;margin-bottom:24px}
+  .progress i{display:block;height:100%;width:62%;background:var(--accent)}
+  .mock-rows{border-top:1px solid var(--line)}
+  .mock-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .mock-row b{font-weight:700}
+  .mock-row span{color:var(--muted)}
+  .stats{display:flex;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stat{flex:1;padding:28px 8px;text-align:left}
+  .stat + .stat{border-left:1px solid var(--line);padding-left:28px}
+  .stat b{display:block;font-size:40px;font-weight:800;letter-spacing:-.01em}
+  .stat span{color:var(--muted);font-size:14px}
+  section.block{padding:88px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:38px;font-weight:800;letter-spacing:-.015em;line-height:1.15;margin:14px 0 16px;max-width:640px}
+  .cols{display:flex;gap:48px}
+  .col{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:32px}
+  .col h3{font-size:19px;margin-bottom:14px}
+  .col ul{list-style:none}
+  .col li{padding:9px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:16px}
+  .col li:last-child{border-bottom:none}
+  .col.new li{color:var(--ink)}
+  .feats{display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+  .feat{width:50%;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:34px}
+  .feat .num{color:var(--accent);font-weight:800;font-size:14px;letter-spacing:.1em}
+  .feat h3{font-size:21px;margin:10px 0 8px}
+  .feat p{color:var(--muted);font-size:16px}
+  .steps{display:flex;gap:40px}
+  .step{flex:1}
+  .step .n{font-size:44px;font-weight:800;color:var(--accent)}
+  .step h3{font-size:19px;margin:8px 0 6px}
+  .step p{color:var(--muted);font-size:16px}
+  .offer{display:flex;gap:48px;align-items:flex-start}
+  .offer-copy{flex:1.2}
+  .offer-box{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:36px}
+  .price{font-size:52px;font-weight:800}
+  .price span{font-size:17px;color:var(--muted);font-weight:400}
+  .offer-box ul{list-style:none;margin:20px 0 26px}
+  .offer-box li{padding:8px 0;border-bottom:1px solid var(--line);font-size:16px}
+  .offer-box li:last-child{border-bottom:none}
+  .faq{max-width:760px}
+  .qa{border-bottom:1px solid var(--line);padding:22px 0}
+  .qa h3{font-size:19px;margin-bottom:6px}
+  .qa p{color:var(--muted);font-size:16px}
+  .final{background:var(--accent);color:#141503;border-radius:var(--radius);padding:64px 56px;text-align:left}
+  .final h2{color:#141503;margin:0 0 12px}
+  .final p{font-size:18px;margin-bottom:28px;max-width:520px}
+  .final .btn{background:#141503;color:var(--accent)}
+  footer{padding:40px 0 56px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <div class="wordmark">PULSE<span>.</span></div>
+    <nav>
+      <a href="#how">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a class="btn" href="#pricing">Start free</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <div class="hero">
+      <div class="hero-copy">
+        <div class="label">Focus timer for creators</div>
+        <h1>Focus sessions that <em>survive</em> your calendar</h1>
+        <p class="sub">Pulse plans deep work around your meetings, not against them. Set a target, start a session, and let the timer defend the block for you.</p>
+        <div class="cta-row">
+          <a class="btn" href="#pricing">Start free</a>
+          <span class="cta-note">Free for your first 20 sessions.<br>No card, no account wall.</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="mock">
+          <div class="mock-head"><span class="mock-title">Now focusing</span><span class="mock-title" style="color:var(--accent)">● Live</span></div>
+          <div class="timer">38:12</div>
+          <div class="timer-sub">Mix revision — due today, 17:00</div>
+          <div class="progress"><i></i></div>
+          <div class="mock-rows">
+            <div class="mock-row"><b>Today</b><span>2 of 3 sessions done</span></div>
+            <div class="mock-row"><b>This week</b><span>11 h 40 m focused</span></div>
+            <div class="mock-row"><b>Next gap</b><span>14:00 – 15:30, kept clear</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>25 min</b><span>default session — short enough to start</span></div>
+      <div class="stat"><b>2 taps</b><span>from opening Pulse to focusing</span></div>
+      <div class="stat"><b>0</b><span>notifications sent during a session</span></div>
+    </div>
+
+    <section class="block">
+      <div class="label mut">The problem</div>
+      <h2>Your timer app and your calendar are fighting. The calendar wins.</h2>
+      <div class="cols">
+        <div class="col">
+          <h3>The old way</h3>
+          <ul>
+            <li>Pick a focus app, ignore it by Wednesday</li>
+            <li>Sessions die at the first meeting invite</li>
+            <li>Streaks punish you for having a job</li>
+            <li>Reports you never open</li>
+          </ul>
+        </div>
+        <div class="col new">
+          <h3>With Pulse</h3>
+          <ul>
+            <li>Sessions are placed in real gaps in your day</li>
+            <li>A meeting moves the session — it never deletes it</li>
+            <li>Weekly targets flex on heavy days</li>
+            <li>One number on Friday: hours focused</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="label mut">What it does</div>
+      <h2>Four things, done properly</h2>
+      <div class="feats">
+        <div class="feat"><div class="num">01</div><h3>Calendar-aware planning</h3><p>Pulse reads your free/busy and proposes session slots that actually exist, every morning at 8:00.</p></div>
+        <div class="feat"><div class="num">02</div><h3>A timer that defends</h3><p>During a session, Pulse holds a "busy" block and silences the apps you choose. Ending early takes two deliberate taps.</p></div>
+        <div class="feat"><div class="num">03</div><h3>Honest targets</h3><p>Set hours per week, not streaks. Miss a day and the plan redistributes — no red X, no guilt mechanics.</p></div>
+        <div class="feat"><div class="num">04</div><h3>A Friday number</h3><p>One weekly summary: sessions held, hours focused, best slot. Thirty seconds to read, then it is gone.</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="how">
+      <div class="label mut">How it works</div>
+      <h2>Running by tomorrow morning</h2>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>Connect your calendar</h3><p>Read-only free/busy access. Pulse never reads event titles.</p></div>
+        <div class="step"><div class="n">2</div><h3>Set a weekly target</h3><p>Five hours is a strong start for most creators.</p></div>
+        <div class="step"><div class="n">3</div><h3>Approve the morning plan</h3><p>One tap at 8:00. Sessions appear, defended, in your day.</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="pricing">
+      <div class="offer">
+        <div class="offer-copy">
+          <div class="label mut">Pricing</div>
+          <h2>One plan. Everything in it.</h2>
+          <p style="color:var(--muted);max-width:460px">Pulse is a tool, not a platform. No tiers, no "Pro" upsell wall, no team plan to grow into. Pay once a year, use it every working day.</p>
+        </div>
+        <div class="offer-box">
+          <div class="price">$48 <span>/ year</span></div>
+          <ul>
+            <li>Unlimited sessions and targets</li>
+            <li>Calendar-aware planning (Google &amp; Outlook)</li>
+            <li>Focus defense for macOS, Windows, iOS, Android</li>
+            <li>Weekly Friday summary</li>
+            <li>Free for your first 20 sessions</li>
+          </ul>
+          <a class="btn" href="#">Start free</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="faq">
+      <div class="label mut">FAQ</div>
+      <h2>Fair questions</h2>
+      <div class="faq">
+        <div class="qa"><h3>Does Pulse read my calendar events?</h3><p>No. It uses free/busy availability only. Event titles, guests and notes never leave your calendar provider.</p></div>
+        <div class="qa"><h3>What happens when a meeting lands on a session?</h3><p>The session moves to the next real gap that day, or rolls to tomorrow. It is rescheduled, never silently dropped.</p></div>
+        <div class="qa"><h3>I have tried focus apps and quit them all. Why is this different?</h3><p>Most focus apps ask you to protect time yourself. Pulse plans inside the calendar you already obey, so the habit it needs from you is one tap at 8:00.</p></div>
+        <div class="qa"><h3>Can I cancel easily?</h3><p>Yes — one click in settings, and the current year simply runs out. No retention flow, no email to support.</p></div>
+      </div>
+    </section>
+
+    <section class="block" style="border-bottom:none">
+      <div class="final">
+        <h2>Your next deep-work block is already in your calendar.</h2>
+        <p>Let Pulse find it, hold it, and time it. First 20 sessions are free.</p>
+        <a class="btn" href="#pricing">Start free</a>
+      </div>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;width:100%">
+    <span>PULSE. — focus sessions that survive your calendar</span>
+    <span>Sample page · Agent Design Skills Pack Vol.1</span>
+  </div>
+</footer>
+</body>
+</html>
