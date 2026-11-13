@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--
+  Agent-Ready Landing Sections Vol.1 — HERO
+  Product demo content: "Pulse" (fictional focus-session app).
+  Before editing this file with an AI coding agent, have the agent read AGENT.md
+  in this folder: it defines the slots, tokens and rules for this section.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulse — Hero Section</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  /* Shared design tokens — identical in every section of this pack.
+     If you merge sections into one page, keep ONE copy of this config. */
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          bg: "#0F1013",        /* page background */
+          panel: "#17181D",     /* card background */
+          panel2: "#1D1E24",    /* raised / inset background */
+          line: "#26272E",      /* hairline borders */
+          ink: "#F4F2EA",       /* primary text */
+          muted: "#9BA0A6",     /* secondary text */
+          accent: "#D9F24F",    /* the one accent color */
+          onaccent: "#141503"   /* text on the accent color */
+        },
+        fontFamily: {
+          sans: ["Inter", "Noto Sans", "ui-sans-serif", "system-ui", "sans-serif"]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { -webkit-font-smoothing: antialiased; }
+  /* Soft accent glow behind the hero copy. Decorative only — safe to delete. */
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(560px 320px at 82% 8%, rgba(217,242,79,.10), rgba(217,242,79,0) 70%),
+      radial-gradient(700px 420px at 8% 0%, rgba(217,242,79,.05), rgba(217,242,79,0) 70%);
+  }
+</style>
+</head>
+<body class="bg-bg font-sans">
+
+<section data-section="hero" class="relative overflow-hidden bg-bg text-ink">
+  <div class="hero-glow" aria-hidden="true"></div>
+
+  <!-- ===== Top bar (part of this section; delete if your page already has a nav) ===== -->
+  <header class="relative border-b border-line">
+    <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
+      <a href="#" data-slot="brand" class="text-xl font-extrabold tracking-tight text-ink">
+        Pulse<span class="text-accent">.</span>
+      </a>
+      <nav class="hidden items-center gap-8 text-[15px] text-muted md:flex" aria-label="Primary">
+        <a href="#features" class="hover:text-ink">Features</a>
+        <a href="#pricing" class="hover:text-ink">Pricing</a>
+        <a href="#faq" class="hover:text-ink">FAQ</a>
+      </nav>
+      <a href="#pricing" data-slot="nav-cta"
+         class="rounded-[10px] bg-accent px-5 py-2.5 text-[15px] font-bold text-onaccent hover:opacity-90">
+        Start free
+      </a>
+    </div>
+  </header>
+
+  <div class="relative mx-auto w-full max-w-7xl px-6 lg:px-8">
+
+    <!-- ===== Hero body ===== -->
+    <div class="grid items-center gap-14 py-16 lg:grid-cols-12 lg:gap-10 lg:py-24">
+
+      <!-- Copy -->
+      <div class="lg:col-span-6">
+        <p data-slot="eyebrow"
+           class="mb-6 inline-block rounded-full border border-line bg-panel px-4 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-accent">
+          Focus sessions, on autopilot
+        </p>
+        <h1 data-slot="headline" class="text-5xl font-extrabold tracking-tight text-ink lg:text-6xl">
+          Focus sessions that <em class="not-italic text-accent">survive</em> your calendar.
+        </h1>
+        <p data-slot="subhead" class="mt-6 max-w-xl text-lg leading-relaxed text-muted lg:text-xl">
+          Pulse reads your calendar, defends blocks of deep work before meetings
+          eat them, and runs the timer, notes and recap for every session —
+          so all you have to do is show up and focus.
+        </p>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a href="#pricing" data-slot="cta-primary"
+             class="rounded-[10px] bg-accent px-7 py-3.5 text-base font-bold text-onaccent hover:opacity-90">
+            Start focusing — it&rsquo;s free
+          </a>
+          <a href="#features" data-slot="cta-secondary"
+             class="rounded-[10px] border border-line px-7 py-3.5 text-base font-bold text-ink hover:bg-panel">
+            See how it works
+          </a>
+        </div>
+        <p data-slot="cta-note" class="mt-5 text-sm text-muted">
+          Free for 14 days &middot; No credit card &middot; Cancel in two clicks
+        </p>
+      </div>
+
+      <!-- Product visual: a faithful mock of the Pulse session screen.
+           Replace the whole block with a screenshot <img> if you have one. -->
+      <div class="relative pb-12 lg:col-span-6" data-slot="visual">
+        <div class="rounded-2xl border border-line bg-panel p-6 shadow-2xl sm:p-8">
+          <div class="mb-6 flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-[0.12em] text-muted">Now focusing</span>
+            <span class="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.12em] text-accent">
+              <span class="h-2 w-2 rounded-full bg-accent"></span> Live
+            </span>
+          </div>
+          <p class="text-base font-semibold text-ink">Q3 launch plan — deep work</p>
+          <p data-slot="visual-timer" class="my-3 text-center text-7xl font-extrabold tracking-tight text-ink sm:text-8xl">24:59</p>
+          <p class="mb-6 text-center text-sm text-muted">of 50 minutes &middot; ends 11:30 AM</p>
+          <div class="mb-7 h-2 overflow-hidden rounded-full bg-panel2">
+            <!-- Session progress: change the width to change the fill. -->
+            <div class="h-full rounded-full bg-accent" style="width:62%"></div>
+          </div>
+          <ul class="divide-y divide-line border-t border-line text-[15px]">
+            <li class="flex items-center justify-between py-3.5">
+              <span class="font-semibold text-ink">Inbox zero sprint</span>
+              <span class="text-muted">Done &middot; 25 min</span>
+            </li>
+            <li class="flex items-center justify-between py-3.5">
+              <span class="font-semibold text-ink">Q3 launch plan</span>
+              <span class="text-accent">In progress</span>
+            </li>
+            <li class="flex items-center justify-between py-3.5">
+              <span class="font-semibold text-ink">Design review prep</span>
+              <span class="text-muted">Up next &middot; 40 min</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Floating proof card -->
+        <div class="absolute bottom-0 left-2 rounded-xl border border-line bg-panel2 px-5 py-4 shadow-xl sm:left-6">
+          <p class="text-2xl font-extrabold tracking-tight text-ink">11 h 40 m</p>
+          <p class="text-sm text-muted">focused this week &middot; <span class="font-semibold text-accent">+18%</span> vs last week</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== Proof strip ===== -->
+    <dl class="grid grid-cols-2 gap-y-10 border-t border-line py-10 lg:grid-cols-4">
+      <div class="flex flex-col pr-6">
+        <dt class="order-2 mt-1 text-sm text-muted">active users focusing daily</dt>
+        <dd data-slot="stat-1" class="order-1 text-4xl font-extrabold tracking-tight text-ink">38,000+</dd>
+      </div>
+      <div class="flex flex-col pr-6">
+        <dt class="order-2 mt-1 text-sm text-muted">deep-work hours logged</dt>
+        <dd data-slot="stat-2" class="order-1 text-4xl font-extrabold tracking-tight text-ink">2.4 M</dd>
+      </div>
+      <div class="flex flex-col pr-6">
+        <dt class="order-2 mt-1 text-sm text-muted">average focus score lift</dt>
+        <dd data-slot="stat-3" class="order-1 text-4xl font-extrabold tracking-tight text-ink">+31%</dd>
+      </div>
+      <div class="flex flex-col pr-6">
+        <dt class="order-2 mt-1 text-sm text-muted">rating from verified reviews</dt>
+        <dd data-slot="stat-4" class="order-1 text-4xl font-extrabold tracking-tight text-ink">4.9 / 5</dd>
+      </div>
+    </dl>
+  </div>
+</section>
+
+</body>
+</html>
